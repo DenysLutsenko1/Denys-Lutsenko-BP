@@ -1,0 +1,933 @@
+% !TeX encoding = UTF-8
+% !TeX spellcheck = sk_SK
+\documentclass[]{tukediphc}
+%% -----------------------------------------------------------------
+%% tento subor ma kodovanie utf-8
+%%
+%% na kompilaciu pouzivajte format pdflatex 
+%%
+%% V pripade problemov kontaktujte Jána Bušu st. (jan.busa@tuke.sk)
+%%
+%% November 2015
+%% -----------------------------------------------------------------
+%%
+%\usepackage[dvips]{graphicx}
+%\DeclareGraphicsExtensions{.eps}
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.mps}
+\graphicspath{{figures/}} % priecinok na obrazky
+%%
+
+\usepackage{indentfirst}
+% это я добавил для первого отступа 
+\usepackage{float}
+% я добавил для таблиц
+\usepackage{tabularx}
+\usepackage{longtable}
+% для таблиц что бы на полную страницу было 
+
+
+
+%\usepackage[utf8]{inputenc}  % je v cls-subore
+%\usepackage[T1]{fontenc}  % je v cls-subore
+\usepackage{lmodern,textcase}
+\usepackage[slovak]{babel}
+\def\refname{Zoznam použitej literatúry}
+\usepackage{latexsym}
+\usepackage{dcolumn} % zarovnanie cisiel v tabulke podla des. ciarky
+\usepackage{hhline}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{nicefrac} % pekne zlomky
+\usepackage{upgreek} % napr. $\upmu\mathrm{m}$ pre mikrometer ...
+\usepackage[final]{showkeys}%color%notref%notcite%final
+% \usepackage[slovak,noprefix]{nomencl} % это тот что было
+\usepackage[noprefix]{nomencl} % это то что стало
+
+
+% таблички по 1 2 3 4 
+\renewcommand{\thetable}{\arabic{table}}
+
+\makeglossary % prikaz na vytvorenie suboru .glo
+
+
+% Pouzit v pripade velkeho poctu subsection v tableofcontents
+%\makeatletter
+%\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{3.5em}}
+%\newcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+%\newcommand*\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
+%\makeatother
+
+
+%\def\thefigure{\Roman{section}.\arabic{figure}}
+
+%\usepackage{parskip}% 'zhusti' polozky obsahu
+%% Cislovane citovanie
+\usepackage[numbers]{natbib}
+%%
+%% Citovanie podľa mena autora a roku
+%\usepackage{natbib} \citestyle{chicago}
+% -----------------------------------------------------------------
+%% tlač !!!
+\usepackage[pdftex,unicode=true,bookmarksnumbered=true,
+bookmarksopen=true,pdfmenubar=true,pdfview=Fit,linktocpage=true,
+pageanchor=true,bookmarkstype=toc,pdfpagemode=UseOutlines,
+pdfstartpage=1]{hyperref}
+\hypersetup{%
+baseurl={http://www.tuke.sk/sevcovic},
+pdfcreator={pdfcsLaTeX},
+pdfkeywords={Optimalizácia, diplomová práca, písanie},
+pdftitle={Optimalizácia písania diplomových prác},
+pdfauthor={Ján Zelený},
+pdfsubject={Bakalárska práca}
+} 
+%% nehodiace zakomentujte !
+% \dippraca{Bakalárska práca}
+\bakpraca{Bakalárska práca}
+%%
+\nazov{Multimodálna detekcia príspevkov sociálnych sietí s obsahom vygenerovaných GenAI}
+%% ked praca nema 'podnazov' zakomentujte nasledujuci riadok
+%% alebo polozku nechajte prazdnu
+\podnazov{}
+\jazyk{Slovenský}
+% anglicky nazov
+\title{Diploma writing optimization}
+\autor{Denys Lutsenko}
+\veduciprace{prof. Ing. Kristína Machová, PhD.}
+\konzultanta{Ing. Viliam Balara}
+%\konzultantb{RNDr.~Marián~Čierny, DrSc.}
+\titul{}
+\univerzita{Technická univerzita v~Košiciach}
+\fakulta{Fakulta elektrotechniky a informatiky}
+\skratkafakulty{FEI}
+\katedra{Katedra kybernetiky a umelej inteligencie}
+\skratkakatedry{KKUI}
+\odbor{Informatika}
+\specializacia{Inteligentné systémy}
+\abstrakt{Abstrakt je povinnou súčasťou každej práce. Je výstižnou
+charakteristikou obsahu dokumentu. Nevyjadruje hodnotiace stanovisko
+autora. Má byť taký informatívny, ako to povoľuje podstata práce.
+Text abstraktu sa píše ako jeden odstavec. Abstrakt neobsahuje odkazy
+na samotný text práce. Mal by mať rozsah 250 až 500 slov. Pri
+štylizácii sa používajú celé vety, slovesá v činnom rode a tretej
+osobe. Používa sa odborná terminológia, menej zvyčajné termíny,
+skratky a~symboly sa pri prvom výskyte v texte definujú.}
+\klucoveslova{Optimalizácia, diplomová práca, písanie}
+\abstrakte{Text abstraktu v~svetovom jazyku je potrebný pre integráciu
+do medzinárodných informačných systémov. Ak nie je možné cudzojazyčnú
+verziu abstraktu umiestniť na jednej strane so slovenským abstraktom,
+je potrebné umiestniť ju na samostatnú stranu (cudzojazyčný abstrakt
+nemožno deliť a~uvádzať na dvoch strabách).}
+\keywords{Optimization, diploma, writing}
+\datumodovzdania{11.~4.~2026}
+\datumobhajoby{15.~6.~2026}
+\mesto{Košice}
+\pocetstran{\pageref{page:posledna}}
+\kategoria{Záverečná práca}
+
+\begin{document}
+\renewcommand{\figurename}{Obrázok}	
+\renewcommand\theHfigure{\theHsection.\arabic{figure}}
+\renewcommand\theHtable{\theHsection.\arabic{table}}
+\bibliographystyle{dcu}
+
+\prvastrana
+
+\titulnastrana
+
+%\analytickylist
+
+
+%\errata % zaciatok erraty
+%Ak je potrebné, autor na tomto mieste opraví chyby, ktoré našiel po
+%vytlačení práce. Opravy sa uvádzajú takým písmom, akým je napísaná
+%práca. Ak zistíme chyby až po vytlačení a zviazaní práce, napíšem
+%erráta na samostatný lístok, ktorý vložíme na toto miesto. Najlepšie je
+%lístok prilepiť \citep{kat}.
+%
+%Forma:
+%
+%%\tabcolsep=10pt
+%\begin{table}[!hb]
+%	\centering
+%	\begin{tabular}{|c|c|c|c|}\hline
+%Strana & Riadok & Chybne & Správne \\\hline\hline
+%12 & 6 & publikácia & prezentácia \\\hline
+%22 & 23 & internet & intranet \\\hline
+%& & & \\\hline
+%& & & \\\hline
+%	\end{tabular}
+%\end{table}
+%\kerrata % koniec erraty
+
+\abstraktsk % abstrakt v SK 
+
+\abstrakteng % abstrakt v ENG
+
+\kabstrakt % koniec abstraktov, nova strana
+
+% Na tomto mieste bude vložené zadanie diplomovej práce
+\zadanieprace
+
+\cestnevyhlasenie
+% Niektorí autori metodických príručiek o~záverečných prácach sa
+% nazdávajú, že takéto vyhlásenie je zbytočné, nakoľko povinnosť
+% vypracovať záverečnú prácu samostatne, vyplýva študentovi zo zákona a
+% na autora práce sa vzťahuje autorský zákon.
+
+\podakovanie
+V tejto časti by som chcel vyjadriť úprimnú vďaku mojej vedúcej práce, prof. Kristíne Machovej, PhD, a môjmu konzultantovi práce, Ing. Viliamovi Balarovi, za ich pomoc, rady a pripomienky k mojej bakalárskej práci. Taktiež by som sa chcel poďakovať svojim rodičom, mojej frajerke Diane a kamarátom za podporu pri písaní tejto práce.
+\kpodakovania
+
+\predhovor
+Predhovor je povinnou náležitosťou záverečnej práce, pozri. V~predhovore autor uvedie základné charakteristiky
+svojej záverečnej práce a~okolnosti jej vzniku. Vysvetlí dôvody, ktoré
+ho viedli k~voľbe témy, cieľ a~účel práce a~stručne informuje
+o~hlavných metódach, ktoré pri spracovaní záverečnej práce použil.
+\kpredhovoru
+
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+\thispagestyle{empty}
+
+{	\makeatletter
+	\renewcommand{\l@figure}{\@dottedtocline{1}{1.5em}{3.5em}}
+	\makeatother
+	\listoffigures}
+
+%\addcontentsline{toc}{section}{\numberline{}Zoznam obrázkov}
+%\listoffigures
+
+
+\newpage
+
+\thispagestyle{empty}
+%\addcontentsline{toc}{section}{\numberline{}Zoznam tabuliek}
+\listoftables
+\newpage
+
+\thispagestyle{empty}
+%\addcontentsline{toc}{section}{\numberline{}Zoznam symbolov a
+%skratiek}
+% \printglossary я это закоиментировал потому что тут была ошибка% vlozenie zoznamu skratiek a symbolov
+\newpage
+
+%\addcontentsline{toc}{section}{\numberline{}Slovník termínov}
+\slovnikterminov
+
+\begin{description}
+\item[GenAI] - Generative Artificial Intelligence, oblasť umelej inteligencie, ktorá sa zameriava na generovanie nového obsahu, ako sú texty, obrázky, zvuky alebo videá, na základe trénovacích dát a modelov hlbokého učenia.
+\item[LLM] - Large Language Model, rozsiahly model hlbokého učenia trénovaný na veľkom množstve textových údajov, ktorý dokáže porozumieť prirodzenému jazyku a generovať text podobný ľudskej reči.
+\item[VILT] - Vision-and-Language Transformer, multimodálny model založený na architektúre Transformer, ktorý integruje vizuálne a textové informácie bez potreby samostatného extraktora vizuálnych prvkov.
+\item[MDETR] - Modulated Detection Transformer, multimodálny model založený na architektúre Transformer, ktorý prepája textové a vizuálne informácie s cieľom porozumieť ich vzájomnému vzťahu.
+\item[ViT] - Vision Transformer, model hlbokého učenia založený na architektúre Transformer, určený na spracovanie a analýzu obrazových údajov.
+\item[WIT] - Wikipedia-Based Image Text Dataset, rozsiahly multimodálny dataset vytvorený spoločnosťou Google, ktorý spája obrázky z Wikipédie s ich textovými popismi, názvami a kontextovými informáciami.
+\item[VQA] - Visual Question Answering, multimodálna úloha umelej inteligencie, ktorej cieľom je odpovedať na otázky o obrázku na základe jeho vizuálneho obsahu. 
+\item[PEFT] - Parameter-Efficient Fine-Tuning, je súbor metód používaných v strojovom učení na prispôsobenie rozsiahlych vopred trénovaných modelov novým, špecifickým úlohám bez nutnosti pretrénovania celého modelu.
+\item[VLP] - Visual logic programming language, modely, ktoré sa učia prepájať obrázky a text, aby pochopili svet multimodálne. Sú vopred vyškolené na prácu s veľkými dátami, aby mohli riešiť problémy, ktoré vyžadujú simultánnu analýzu videnia a jazyka.
+\item[CNN] - Convolutional neural network, neurónova sieť optimalizovanú na spracovanie obrazu, ktorá využíva konvolučné vrstvy na automatickú extrakciu kľúčových vizuálnych prvkov.
+\item[NLP] - Natural language programming, ontologicky asistovaný spôsob programovania z hľadiska viet prirodzeného jazyka.
+\item[BLIP-2] - Bootstrapping Language-Image Pre-training with Frozen Image Enco-
+ders and Large Language Models) je pokročilý multimodálny model vyvinutý spo-
+ločnosťou Salesforce Researc
+\end{description}
+
+\kslovnikterminov
+%
+\include{uvod}
+%
+\include{formulacia}
+%
+\include{analyza}
+%
+\include{jadroprace}
+%
+\include{zaver}
+%
+\include{literatura}
+%
+\include{prilohy}
+%
+%\include{prilohaa}
+%
+%\include{prilohab}
+%
+%\include{prilohac}
+%
+% zivotopis autora
+\newpage
+\phantomsection
+\protect\label{page:posledna}
+\curriculumvitae
+Táto časť je nepovinná. Autor tu môže uviesť svoje biografické
+údaje, údaje o~záujmoch, účasti na~projektoch, účasti na~súťažiach,
+získané ocenenia, zahraničné pobyty na~praxi, domácu prax, publikácie
+a~pod.
+\kcurriculumvitae
+
+
+\section{Ciele práce}
+Hlavným cieľom môjho výskumu je vyvinúť multimodálny klasifikačný model schopný presne analyzovať a interpretovať multimodálne dáta zo sociálnych médií vrátane textových aj vizuálnych komponentov (fotografií). Tento model musí spracovať každý typ dát spoločne, aby získal poznatky, ktoré presne predpovedajú, či je príspevok vytvorený človekom alebo umelou inteligenciou. Tento model bude účinne bojovať proti dezinformáciám.
+
+Súbežne s technickým vývojom modelu je veľmi dôležitým cieľom vytvoriť intuitívne a vizuálne prístupné používateľské rozhranie. To zabezpečí, že model (nástroj), ktorý som vyvinul, bude užitočný a zrozumiteľný pre každého používateľa bez ohľadu na jeho úroveň digitálnej gramotnosti.
+
+Výskum ďalej zahŕňa experimenty na vyhodnotenie citlivosti modelu na rôzne modality, ako je text a obrázky, s cieľom identifikovať, ktorá má na model najväčší vplyv, a vhodne ho doladiť.
+
+
+\subsection{Motivácia}
+Motiváciou môjho projektu je neustály vývoj technológií generatívnej umelej inteligencie (AI), ktoré denne generujú masívny prílev presvedčivých, ale nepravdivých informácií na sociálnych sieťach. Tento vývoj predstavuje vážny problém systémovej dezinformácie a podkopáva dôveru v mediálne zdroje. Existuje veľká potreba účinných nástrojov na automatické overovanie pôvodu obsahu.
+
+Môj projekt zahŕňa vývoj a testovanie robustného klasifikačného modelu, ktorý dokáže určiť, či príspevok alebo obrázok vytvorila ľudská alebo umelá inteligencia. Toto je kľúčové, pretože mnohí autori neposkytujú výslovné upozornenie na obsah generovaný umelou inteligenciou. Môj model prispeje k udržaniu digitálnej hygieny.
+
+Motivuje ma, aby bol model praktický pre všetky vekové skupiny, najmä pre používateľov s nízkou úrovňou digitálnej gramotnosti, ktorí sú najzraniteľnejší voči technologicky vyspelým falzifikátom. To im poskytne nástroj na rýchle a spoľahlivé overovanie, ktorý ich ochráni pred sebaklamom a falošnými správami.
+
+
+
+
+
+\subsection{Definícia problému}
+Doba, v ktorej žijeme, sa vyznačuje exponenciálnym rastom objemu dát na sociálnych sieťach, ktoré sa stali dominantným zdrojom informácií. Tento jav je však sprevádzaný novou výzvou, ktorou je vznik pokročilých modelov generatívnej umelej inteligencie (GenAI). Tieto modely dokážu vytvárať veľmi kvalitný text a obrázky, ktoré sa navzájom úzko dopĺňajú. 
+
+Podstata nášho problému spočíva v strate schopnosti rozlišovať medzi skutočnými a umelo generovanými príspevkami. Na rozdiel od falošných správ dosahuje moderný obsah GenAI veľmi vysokú úroveň a ľahko šíri falošné informácie údajne podporované generovanými videami a príspevkami. Túto situáciu zhoršuje skutočnosť, že niektorí tvorcovia tohto typu príspevkov neuvádzajú vygenerovaný pôvod videí, čo môže ľahko zavádzať najmä starších ľudí. Z technického hľadiska spočíva problém v multimodálnosti formátu, pretože príspevky obsahujú fotografie aj text. Keďže sa používajú dva typy dát, ako je text a obrázky, bude potrebné použiť modely, ktoré podporujú multimodálnosť a dokážu identifikovať sémantické závislosti. Tento problém si vyžaduje automatizované riešenie. 
+
+Vývoj takýchto automatizovaných systémov je však komplikovaný skutočnosťou, že \textbf{účinnosť súčasných metód detekcie výrazne klesá} pri použití aj jednoduchých techník manipulácie s obsahom. Štúdia Perkinsa a kol. identifikovala niekoľko kľúčových metód, ktoré dokážu znížiť presnosť detektorov v priemere o 17,4 \%\cite{Simple_techniques_to_bypass_GenAI_text_detectors:_implications_for_inclusive_education}. Tento pokles svedčí o tom, že samotná analýza multimodálnych dát musí čeliť sofistikovaným snahám o maskovanie pôvodu AI. Medzi najefektívnejšie techniky patria:
+
+\begin{itemize}
+    \item \textbf{Zámerné vkladanie pravopisných chýb (SE):} Napodobňovanie ľudských preklepov a gramatických nepresností, ktoré detektory interpretujú ako znak ľudského autora\cite{Simple_techniques_to_bypass_GenAI_text_detectors:_implications_for_inclusive_education}.
+    \item \textbf{Zvyšovanie premenlivosti viet (Burstiness):} Úprava dĺžky a štruktúry viet tak, aby text nepôsobil monotónne, čo je typickým znakom surového výstupu z LLM\cite{Simple_techniques_to_bypass_GenAI_text_detectors:_implications_for_inclusive_education}.
+    \item \textbf{Parafrázovanie pomocou externých nástrojov (PR):} Použitie nástrojov ako Quillbot na prepísanie textu vygenerovaného AI, čo môže znížiť úspešnosť detekcie až o 21 \%\cite{Simple_techniques_to_bypass_GenAI_text_detectors:_implications_for_inclusive_education}.
+\end{itemize}
+
+Preto sa tento článok zameriava na vývoj a experimentálne overenie modelu hlbokého učenia, ktorý je špeciálne navrhnutý na multimodálnu detekciu príspevkov s obsahom generovaným GenAI, s cieľom zlepšiť transparentnosť a bezpečnosť v online informačnom priestore.
+
+\section{Analýza súčasného stavu}
+
+\subsection{Generatívna umelá inteligencia (GenAI)}
+Generatívne umelé inteligencie (GenAI) je podoblasť umelej inteligencie, ktorá využíva generatívne modely na generovanie nového obsahu, ako je text, obrázky, video, audio alebo programový kód. Generatívne modely sa učia základné vzory a štruktúry z veľkých trénovacích súborov údajov a potom používajú údaje, na ktorých boli trénované, na generovanie nových údajov na základe vstupných inštrukcií (zvyčajne vo forme príkazov prirodzeného jazyka). 
+
+Počas boomu umelej inteligencie v roku 2000 sa tieto nástroje rozšírili vďaka pokroku v hlbokých neurónových sieťach založených na architektúre Transformer, najmä v oblasti rozsiahlych jazykových modelov (LLM). Medzi najznámejšie nástroje patria chatboty ako ChatGPT, Copilot a Gemini; modely prevodu textu na obrázok ako Stable Diffusion, Midjourney a DALL-E; a modely prevodu textu na video ako Sora. Medzi technologické spoločnosti vyvíjajúce generatívnu umelú inteligenciu patria OpenAI, Microsoft, Google a Meta. GenAI sa používa v mnohých odvetviach vrátane zdravotníctva, financií, zábavy, marketingu a dizajnu\cite{wiki:genai}.
+
+Okrem etických a bezpečnostných obáv má vývoj GenAI hlboké dôsledky pre ekonomické štruktúry a trh práce. Tieto nástroje zvyšujú produktivitu automatizáciou bežných aj kognitívnych úloh, potenciálne transformujú niektoré profesie a dokonca vedú k zrušeniu niektorých pracovných miest. Zatiaľ čo niektoré pracovné miesta sa rušia, vzniká nová generácia rolí zameraných na správu, konfiguráciu a interakciu s modelmi GenAI.
+
+Vývoj GenAI však vyvoláva etické obavy a zložitosti, pretože by sa mohla použiť na kybernetickú kriminalitu, šírenie falošných správ a deepfakov a vyvoláva otázky týkajúce sa porušovania duševného vlastníctva a vplyvov na životné prostredie kvôli jej vysokej spotrebe energie.
+
+Okrem spomínaných etických rizík predstavuje zásadnú výzvu neschopnosť ľudí rozlíšiť texty vytvorené týmito modelmi od textov napísaných človekom. Výskum Kumara a Mindzaka (2024) v tomto kontexte uvádza, že zatiaľ čo ľudia dokážu identifikovať ľudský text s presnosťou približne 63 \%, ich úspešnosť pri odhalení obsahu vygenerovaného umelou inteligenciou klesá na kritických 24 \%. Tento dramatický rozdiel podčiarkuje nevyhnutnosť vývoja pokročilých automatizovaných systémov na detekciu GenAI obsahu, nakoľko samotný ľudský úsudok v prostredí moderných LLM modelov prestáva byť spoľahlivou bariérou proti šíreniu dezinformácií.\cite{Detecting_Artificial_Intelligence_Generated_Text_from_Human-Written_Text}
+
+\subsection{Multimodálne modely}
+Multimodálne modely sú modely hlbokého učenia navrhnuté na prácu s informáciami a ich analýzu naprieč viacerými modalitami (text, obrázky). Na rozdiel od modelov, ktoré pracujú s jedným dátovým typom, sa multimodálne modely snažia integrovať rôzne modality, aby poskytli komplexné pochopenie.
+
+Multimodálny prístup je nevyhnutný pre boj proti komplexným dezinformáciám na sociálnych sieťach. Moderný obsah generovaný umelou inteligenciou zriedka existuje v jednej forme; príspevok často kombinuje text s umelým obrázkom a každá modalita môže obsahovať rôzne indície o jeho pôvode. Aj keď textová zložka neobsahuje zjavné známky generovania, vizuálne artefakty v pridruženom obrázku môžu slúžiť ako dostatočný dôkaz generovania a naopak. Preto sú iba modely schopné integrovať a spracovať tieto základné a dodatočné informácie dostatočne spoľahlivé na to, aby presne klasifikovali obsah príspevku a efektívne rozlíšili deepfake od príspevkov generovaných človekom.
+
+Architektúra takýchto modelov je typicky založená na architektúre Transformer (napr. VILT, CLIP, MDETR), ktorá sa osvedčila v oblasti porozumenia a spracovania prirodzeného jazyka. Architektúra Transformer umožňuje efektívne modelovanie medzimodálnych interakcií pomocou mechanizmu pozornosti, kde tokeny z rôznych modalít môžu navzájom interagovať\cite{arxiv:clip}.
+
+Hlavným problémom komplexných multimodálnych modelov je ich nepriehľadnosť. To znamená, že sú výkonné, ale ťažko interpretovateľné, čo sťažuje ladenie a znižuje dôveru v ich predpovede v dôležitých doménach, ako je GenAi.
+
+V multimodálnych modeloch je tiež kľúčovým aspektom dôležitosť každej modality. Čo to znamená? Označuje, ktorá časť informácií je kľúčová pre predikciu. Na príklade GenAI dokáže model detekovať generované pôvody iba z textu (kvôli neprirodzenej syntaxi alebo slovnej zásobe) alebo iba z obrázkov (kvôli artefaktom alebo zvláštnym detailom). Analýza dôležitosti nám umožňuje určiť, či je model príliš závislý od jedného zdroja modality.
+
+Cieľom multimodálneho učenia je vytvoriť spoločný priestor prvkov. V tomto priestore sú prvky vysokej úrovne z rôznych modalít kódované do jednotných numerických vektorov (embeddingov)\cite{arxiv:clip}.
+
+\subsection{Detekcia AI generovaného obsahu}
+Rastúce používanie rozsiahlych jazykových modelov (LLM), difúznych vizuálnych generátorov a nástrojov syntetického zvuku viedlo k rastúcej obave verejnosti. Medzi kľúčové obavy patria dezinformácie, porušovanie autorských práv, bezpečnostné hrozby (ako sú phishingové útoky a sociálne inžinierstvo) a narušenie dôvery verejnosti a akademickej integrity. Tieto riziká si vyžadujú vývoj a implementáciu účinných metód na detekciu obsahu generovaného umelou inteligenciou. 
+
+Detekciu však brzdí množstvo vážnych výziev. V prvom rade ide o „preteky v zbrojení“ s generátormi: s vývojom generatívnych modelov sa staršie stratégie detekcie rýchlo stávajú neúčinnými a vyžadujú si neustálu aktualizáciu a prispôsobovanie detektorov. Okrem toho existuje zraniteľnosť voči modifikácii: drobné preformulovanie textu, orezanie alebo zmena obrázkov alebo úprava výšky/tempa zvuku môže obísť naivné metódy detekcie. Ďalšou veľkou výzvou je problém zovšeobecnenia domény: detektory trénované len na výstupe generatívnych modelov fungujú zle s novými alebo neznámymi architektúrami, čo obmedzuje ich všeobecnosť\cite{arxiv:2504.02898} .
+
+Aktuálnosť týchto technických výziev potvrdzuje aj účasť vedeckých tímov na prestížnych súťažiach ako SemEval-2024 (Task 8). Výskum v rámci systému NootNoot ukazuje, že detekcia sa musí vyrovnať s čoraz zložitejšími scenármi, kde modely ako ChatGPT alebo GPT-4 generujú texty v rôznych doménach a jazykoch. Kľúčovým problémom sa stáva identifikácia hybridného obsahu, teda textov, ktoré boli strojom vygenerované a následne človekom upravené, aby pôsobili prirodzenejšie a vyhli sa automatizovaným detektorom\cite{Fine-tuning_Language_Models_for_AI_vs_Human_Generated_Text_detection}.
+
+Nakoniec je tu etická zložitosť spojená s rozsiahlym skenovaním obsahu, ktorá vyvoláva obavy o súkromie používateľov a vysoké riziko falošne pozitívnych výsledkov, ktoré môžu poškodiť reputáciu. Okrem technických výziev zohráva pri úspešnosti identifikácie kľúčovú úlohu aj tzv. uvedomenie si registra (register awareness). Výskumy naznačujú, že účinnosť detektorov sa výrazne líši v závislosti od funkčného štýlu textu. Zatiaľ čo LLM dokážu s vysokou presnosťou napodobniť štruktúrované akademické alebo technické texty, pri neformálnej komunikácii typickej pre sociálne siete často zlyhávajú. Tento rozdiel v profiloch — kde AI produkuje gramaticky bezchybný, no emocionálne plochý obsah bez prirodzeného „sémantického šumu“ (slang, elipsy) — predstavuje dôležitý indikátor\cite{Berber_Sardinha_2024}. V rámci multimodálnej analýzy môže práve nesúlad medzi neformálnym vizuálnym kontextom a neprirodzene formálnym textom slúžiť ako signál syntetického pôvodu. Na základe týchto charakteristík možno metódy detekcie rozdeliť podľa modality na: 
+
+1) Signálové/štatistické metódy: Tieto metódy sú založené na analýze jemných, ale robustných prvkov, ktoré sú vlastné generovanému obsahu, ako je stylometria (prvky štýlu) v texte alebo pixelové a spektrálne prvky vo vizuálnom a zvukovom obsahu\cite{arxiv:2504.02898}.
+
+2) Pravdepodobnostné metódy (Model-Likelihood): Tieto metódy merajú zmätenosť (stupeň nepredvídateľnosti) alebo zakrivenie pravdepodobnosti, aby sa posúdila pravdepodobnosť, že daný obsah bol vygenerovaný daným generatívnym modelom. 
+
+3) Kontrolované klasifikátory: Tento prístup zahŕňa jemné doladenie veľkých predtrénovaných transformátorov na rozsiahlych označených súboroch údajov obsahujúcich vzorky obsahu generovaného umelou inteligenciou aj človeka. 
+
+4) Mechanizmy pôvodu: Tieto sa zameriavajú na vkladanie informácií o vytvorení obsahu od samého začiatku. Patria sem použitie vodoznakov, odtlačkov prstov a autentifikácie obsahu k osobe (C2PA)\cite{arxiv:2504.02898}. 
+
+5) Metódy založené na vyhľadávaní a konzistencii: Patria sem vyhľadávanie najbližších zhôd v korpuse výstupov modelu (na zistenie, či bol text parafrázovaný zo známeho výstupu AI) a kontrola medzimodálnej korešpondencie (napr. zhoda zvukových a obrazových stôp v deepfake)\cite{arxiv:2504.02898}.
+
+\begin{table}[H]
+\centering
+\caption{Metódy na detekciu textu generovaného umelou inteligenciou (LLM)}
+\label{tab:llm_detection_methods}
+\resizebox{0.9\textwidth}{!}{
+\begin{tabular}{|p{0.27\textwidth}|p{0.40\textwidth}|p{0.25\textwidth}|}
+\hline
+\textbf{Metóda} & \textbf{Popis} & \textbf{Obmedzenia} \\
+\hline
+\textbf{Prompting LLM (Zero-shot)}  & Použitie externého LLM na klasifikáciu textu pomocou starostlivo vytvorených výziev. & Citlivosť na rýchle formulácie a obmedzená presnosť.  \\
+\hline
+\textbf{Jazykové/štatistické podpisy}  & Analýza zložitosti, logaritmickej pravdepodobnosti alebo stylometrických znakov (napr. zložitosť syntaxe)\cite{arxiv:2504.02898}. & Zraniteľnosť voči parafrázovacím útokom. \\
+\hline
+\textbf{Kontrolovaná klasifikácia}  & Trénovanie špecializovaných detektorov (napr. pomocou RoBERTa, T5) na generovaných/ľudských textových korpusoch.  &  Je potrebná neustála aktualizácia vysokokvalitnými údajmi, najmä keď sa objavia nové generátory.  \\
+\hline
+\textbf{Vodoznaky}  & Zmena generovania na úrovni výberu tokenov s cieľom vložiť nepostrehnuteľný vzorec. & Nefunguje s nespolupracujúcimi alebo otvorenými modelmi; je náchylné na parafrázovanie. \\
+\hline
+\textbf{Ochrana vyhľadávania (Retrieval-augmented)}  & Vyhľadajte blízke duplikáty v korpuse výstupov modelu na identifikáciu textov vytvorených parafrázou\cite{arxiv:2504.02898}. & Účinné proti parafrázovaniu, ale vyžaduje zachovanie výstupného indexu LLM. \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Metódy detekcie vizuálneho obsahu generovaného AI (Obrázky)}
+\label{tab:visual_detection_methods}
+\resizebox{0.9\textwidth}{!}{
+\begin{tabular}{|p{0.27\textwidth}|p{0.35\textwidth}|p{0.3\textwidth}|}
+\hline
+\textbf{Metóda (Metód)} & \textbf{Popis (Opis)} & \textbf{Kľúčové Znaky (Kľúčové Vlastnosti)} \\
+\hline
+\textbf{Analýza artefaktov} & Analýza štatistík na úrovni pixelov alebo frekvenčných domén (napr. pomocou Fourierovej transformácie) na zistenie "šumu" alebo textúr, charakteristických pre modely GANs/difúzne modely\cite{arxiv:2504.02898}. & Artefakty osvetlenia, tiene, anatomické nezrovnalosti. \\
+\hline
+\textbf{Hlboké učenie} & Klasifikátory založené na CNN (napr. ResNet) sú trénované na veľkých objemoch označených dát. & — \\
+\hline
+\textbf{Vodoznaky/ Pôvod} & Vkladanie neviditeľných priestorových alebo frekvenčných kódovaní; použitie štandardov typu C2PA na pridanie metadát o pôvode\cite{arxiv:2504.02898}. & — \\
+\hline
+% \textbf{Video forenzika} & Analýza časových a fyziologických signálov pre video. & Nezrovnalosti foném a viditeľných artikulácií pier (phoneme-viseme), vzdialená fotopletyzmografia (rPPG) — zmeny farby pleti súvisiace s pulzom, žmurkanie očí.\cite{arxiv:2504.02898} \\
+% \hline
+\end{tabular}
+}
+\end{table}
+
+
+
+
+\subsection{Sociálne siete ako zdroj dát}
+Sociálne médiá sú v súčasnosti rozsiahlym zdrojom, ktorý umožňuje ľuďom prístup k širokej škále informácií, od zábavy až po politické údaje a ďalšie. Sociálne médiá sú prirodzeným zdrojom údajov, pretože každý používateľ môže nahrať svoje vlastné informácie do siete alebo naopak vyhľadávať informácie v reálnom čase. Keďže používatelia môžu pridávať, upravovať a mazať konkrétny obsah – ako napríklad text, video, audio a multimodálne príspevky – tento zdroj nikdy nebude mať pevnú veľkosť a s rozširovaním sociálnych médií bude objem informácií len rásť. V súčasnosti sociálne médiá používa 64\% ľudstva, čo umožňuje rozsiahle šírenie informácií po celom svete\cite{researchgate:socialmedia}. 
+
+Ďalšou dôležitou vlastnosťou údajov zo sociálnych médií je ich multimodálna povaha, ktorá je kľúčová pre detekciu komplexného obsahu. V kontexte mojej práce to znamená, že spracovávaný príspevok sa zriedkakedy obmedzuje len na text. Zahŕňa text a obrázky, ktoré tvoria celkový sémantický obsah. Na správnu a úplnú interpretáciu takejto publikácie musí analytický systém súčasne používať metódy spracovania prirodzeného jazyka (NLP) a počítačového videnia na prepojenie významov oboch modalít. Tento proces analýzy modality je hlavnou technickou výzvou pri extrakcii presných informácií a je základom efektívnej detekcie.
+
+Medzi výhody patrí proces, ktorý prebieha v reálnom čase, informácie sa rýchlo šíria po celom svete a všetko je verejne dostupné, čo umožňuje každému prístup k tomu, čo potrebuje, kedykoľvek.
+
+Medzi nevýhody patrí hlavný problém falošné informácie a s rozvojom umelej inteligencie a rôznych botov sa falošné informácie na sociálnych médiách čoraz viac rozširujú. Vzhľadom na nízku schopnosť bežných používateľov rozlíšiť strojom generovaný obsah od ľudského, sa sociálne siete stávajú zraniteľnejšími voči manipulatívnym kampaniam. Multimodálny prístup k detekcii je preto kľúčový, pretože dokáže kompenzovať limity ľudského vnímania analýzou vizuálnych a textových príznakov, ktoré sú pre človeka často nepostrehnuteľné\cite{Detecting_Artificial_Intelligence_Generated_Text_from_Human-Written_Text}.
+
+Okrem priameho získavania faktov a správ sú sociálne médiá neoceniteľným zdrojom na analýzu verejnej mienky a nálad. Keďže miliardy používateľov denne zdieľajú svoje osobné myšlienky, recenzie produktov a služieb alebo reakcie na politické udalosti, analytici môžu rýchlo zachytiť meniace sa nálady a predpovedať spoločenské trendy. To umožňuje spoločnostiam rýchlo reagovať na potreby zákazníkov a výskumníkom získať hlboké pochopenie ľudských reakcií. Sociálne médiá tak poskytujú nielen informácie o udalostiach, ale aj jedinečný pohľad na to, ako ich ľudia vnímajú.
+
+Na záver by som chcel povedať, že sociálne siete sú veľmi rozsiahlym zdrojom údajov, ktoré možno použiť na získanie akýchkoľvek informácií, ale získané informácie je potrebné filtrovať.
+
+
+\subsection{CLIP}
+
+CLIP (Contrastive Language-Image Pretraining) je multimodálny model umelej inteligencie vyvinutý spoločnosťou OpenAI, ktorý predstavuje významný pokrok v predtréningu rozsiahlych modelov. Základná schopnosť modelu spočíva v nadväzovaní sémantických väzieb medzi textovými popismi a im zodpovedajúcimi obrázkami, čo mu umožňuje učiť sa širokú škálu vizuálno-lingvistických konceptov.
+
+Funkčne CLIP negeneruje titulky; jeho primárnou úlohou je určiť stupeň korešpondencie (podobnosti) medzi daným textovým popisom a konkrétnym vizuálnym obrázkom. To sa dosahuje použitím schémy kontrastného učenia. Architektúra CLIP zahŕňa dva nezávislé kodéry, ktoré sú trénované spoločne od začiatku: na spracovanie textu sa používa 12-vrstvový transformátor a na vizuálne dáta sa používa kodér založený na architektúre Vision Transformer (ViT)\cite{CLIParXiv:2210.08901}. Dôležitým aspektom architektúry je použitie lineárnej projekcie na zarovnanie výstupov oboch kodérov do zdieľaného multimodálneho priestoru. Tento proces zabezpečuje, že vizuálne príznaky extrahované z obrázkov a textové embeddingy majú identickú dimenziu, čo je nevyhnutné pre následný výpočet ich sémantickej podobnosti a efektívnu klasifikáciu\cite{MMCCLIP}.
+
+Kontrastné učenie CLIP je proces, v ktorom sa model učí priradiť $N$ správnych párov obrázok-text $(I_i, T_i)$ spomedzi $N^2$ možných kombinácií v rámci jednej dávky (batch). Model vypočíta párový skalárny súčin $\text{Similarity}(I_i, T_j)$ medzi všetkými $N$ embeddingmi obrázkov a $N$ embeddingmi textu. Výsledná matica podobnosti $\mathbf{S}$ má rozmer $N \times N$. \textbf{Funkcia straty (Loss Function)} je symetrická kombinácia krížovej entropie ($\text{Cross-Entropy Loss}$), aplikovaná na klasifikáciu obrázkov podľa ich textových popisov a na klasifikáciu textov podľa ich obrázkov. V ideálnom prípade by po trénovaní mala byť matica podobnosti diagonálna, kde maximálne hodnoty (vysoká podobnosť) pripadajú na zhodné páry $(I_i, T_i)$ a hodnoty mimo diagonály by mali byť minimálne. To zaisťuje, že model nielen rozpoznáva jednotlivé objekty, ale aj vytvára všeobecnú sémantickú zhodu\cite{researchgate:Learning_Transferable_Visual_Models_From_Natural_Language_Supervision}.
+
+Tréning sa uskutočnil na rozsiahlom súbore údajov WebImageText (WIT), ktorý pozostáva zo 400 miliónov párov obrázkov a textu. Kľúčovým cieľom trénovania je zarovnať vektorové reprezentácie (vnorenia) textu a obrázka do spoločného priestoru, kde je podobnosť pre zhodné páry maximalizovaná a pre nezhodné páry minimalizovaná. Okrem základného kontrastného učenia sa v súčasnosti CLIP využíva ako robustný extraktor príznakov pre špecializované klasifikačné hlavy. Výskumy ukazujú, že jemné doladenie (fine-tuning) na konkrétnych úlohách dosahuje lepšie výsledky, ak sa kombinujú rôzne stratégie fúzie dát, ako sú sumačná fúzia (Sum Fusion) alebo konkatenačná fúzia, ktoré umožňujú modelu lepšie integrovať informácie z oboch modalít súčasne\cite{MMCCLIP}.
+
+Najvýznamnejšou výhodou CLIPu je jeho schopnosť vykonávať učenie s nulovým počtom pokusov. To umožňuje modelu vykonávať úlohy klasifikácie obrázkov do nových kategórií, na ktorých nebol explicitne trénovaný. Táto schopnosť širokého zovšeobecnenia robí z CLIPu všestranný komponent používaný v rôznych aplikačných oblastiach vrátane generovania obrázkov (napr. v DALL·E 3), sémantického vyhľadávania, moderovania obsahu a vizuálneho odpovedania na otázky (VQA). Treba poznamenať, že rovnako ako všetky rozsiahle modely, aj CLIP môže dediť skreslenia zo svojej trénovacej sady a na svoju prevádzku vyžaduje značné výpočtové zdroje\cite{geeksforgeeks:clip}.
+
+V kontexte multimodálnej detekcie príspevkov na sociálnych sieťach generovaných umelou inteligenciou (GenAI) zohráva CLIP kľúčovú úlohu vďaka svojej schopnosti analyzovať vzťah medzi vizuálnou a textovou zložkou príspevku súčasne. Na rozdiel od klasických klasifikátorov, ktoré sa zameriavajú len na obrazové artefakty, CLIP dokáže identifikovať sémantické nezrovnalosti – napríklad situácie, kedy textový popis presne nezodpovedá obsahu vygenerovaného obrázka alebo kedy je text príliš generický.
+
+Vďaka trénovaniu na obrovskom množstve dát z reálneho internetového prostredia je model vysoko odolný voči rôznym štýlom obsahu, ktoré sa na sociálnych sieťach vyskytujú (memes, reklamy, digitálne umenie). To umožňuje efektívne filtrovať podozrivý obsah v reálnom čase aj bez predchádzajúcej znalosti konkrétneho generatívneho algoritmu, ktorý bol použitý na vytvorenie príspevku.
+
+{\small
+\begin{longtable}{|p{0.135\textwidth}|p{0.24\textwidth}|p{0.54\textwidth}|}
+% Закрывающая скобка должна быть СРАЗУ после текста названия
+\caption{Prehľad výhod a nevýhod} \label{tab:clip_comparison} \\ 
+\hline
+\textbf{Typ} & \textbf{Názov} & \textbf{Popis} \\
+\hline
+\endfirsthead
+
+\multicolumn{3}{c}%
+{{\bfseries \tablename\ \thetable{} -- pokračovanie}} \\
+\hline
+\textbf{Typ} & \textbf{Názov} & \textbf{Popis} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{3}{r}{{\textit{Pokračovanie na ďalšej strane}}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\textbf{Výhoda} & Nízke výpočtové náklady & Výpočet CLIPScore je extrémne rýchly, čo umožňuje efektívne filtrovanie miliónov párov obrázok-text v masívnych datasetoch (napr. LAION)\cite{Finetuned_Multimodal_Language_Models_Are_High-Quality_Image-Text_Data_Filters}.  \\
+\hline
+\textbf{Výhoda} & Univerzálnosť (Zero-shot) & Model vykazuje silnú schopnosť zovšeobecňovania na nové domény bez potreby ďalšieho trénovania, čo je užitočné pre rôznorodý obsah sociálnych sietí. \\
+\hline
+\textbf{Výhoda} & Sémantické zarovnanie & CLIP efektívne zachytáva globálne sémantické vzťahy, čo pomáha identifikovať príspevky, kde text vôbec nesúvisí s priloženým obrázkom. \\
+\hline
+\textbf{Nedostatok} & Nízka citlivosť na detaily & CLIP často prehliada jemné vizuálne detaily a nesprávne atribúty objektov, čo znižuje jeho schopnosť odhaliť drobné artefakty generatívnej AI. \\
+\hline
+\textbf{Nedostatok} & Problém s kompozíciou & Model má ťažkosti so spracovaním zložitých syntaktických štruktúr a priestorových vzťahov medzi objektmi (napr. „vľavo“, „pod“, „väčší ako“)\cite{Finetuned_Multimodal_Language_Models_Are_High-Quality_Image-Text_Data_Filters}.  \\
+\hline
+\textbf{Nedostatok} & Povrchná analýza textu & CLIP má tendenciu ignorovať gramatickú správnosť a koherentnosť textu, čím môže označiť nekvalitný alebo nezmyselný text vygenerovaný AI za relevantný\cite{Finetuned_Multimodal_Language_Models_Are_High-Quality_Image-Text_Data_Filters}. \\
+\hline
+\textbf{Nedostatok} & Obmedzená dĺžka kontextu & CLIP má fixný limit na dĺžku textového vstupu (zvyčajne 76 tokenov), čo spôsobuje stratu informácií pri analýze dlhších príspevkov na sociálnych sieťach.\cite{MMCCLIP}. \\
+\hline
+\end{longtable}
+}
+
+Napriek vzniku zložitejších metód filtrovania zostáva CLIP fundamentálnou technológiou, ktorá radikálne zmenila prístup k trénovaniu multimodálnych modelov. Jeho zavedenie umožnilo prechod od manuálneho spracovania údajov k škálovateľnému automatickému filtrovaniu stoviek miliónov párov obrázok-text, čo sa stalo kľúčom k vytvoreniu moderných vizuálno-lingvistických systémov. Vďaka svojej výnimočnej výpočtovej efektívnosti a schopnosti zovšeobecňovania (zero-shot) CLIP naďalej slúži ako „zlatý štandard“ a spoľahlivý východiskový bod (baseline) pre väčšinu súčasných výskumov v oblasti počítačového videnia\cite{Finetuned_Multimodal_Language_Models_Are_High-Quality_Image-Text_Data_Filters}.
+
+\subsection{VILT}
+VILT je moderný multimodálny model určený na spoločné porozumenie textu aj obrázkov. Patrí do triedy modelov využívajúcich predtrénovanie (VLP). 
+
+Primárnym cieľom VILT je výrazne zjednodušiť a zrýchliť spracovanie vizuálnych a textových údajov v porovnaní s predchádzajúcimi modelmi, ktoré sa spoliehali na zložité a pomalé metódy extrakcie prvkov.
+
+Architektúra a kompozícia VILT Architektúra VILT je minimalistická a bezproblémová, pretože spracováva obe modality rovnako a konzistentne v rámci toho istého Transformer kodéra, čím sa vyhýba zložitým medziľahlým komponentom. 
+
+
+
+
+
+
+
+\begin{enumerate}
+    \item Visual Embedder (Image Patching and Embedding) Zjednodušenie vizuálneho vstupu: Na rozdiel od starších modelov, ktoré používali ťažké konvolučné neurónové siete (CNN), ako napríklad ResNet, na extrakciu regionálnymi prvkami, VILT používa prístup Vision Transformer (ViT)\cite{arxiv:2102.03334}. 
+    
+    Patches: Vstupný obrázok je rozdelený na pevné, neprekrývajúce sa bloky (Patches). Lineárna projekcia: Každá záplata je sploštená a premietnutá do vektora pomocou jednoduchej lineárnej projekcie. Vďaka tomu je vizuálny vstup analogický s tokenmi v NLP.
+    \item Vkladanie textu (Text Embedding) Text sa spracováva štandardným spôsobom: slová sa tokenizujú a konvertujú na vektory (embeddings), ktoré nesú informácie o význame a pozícii slova vo vete. 
+    \item Kombinovanie a transformácia (Single Transformer Encoder) Kombinovanie: Po vytvorení vkladaní sa vizuálne embeddings a textové tokeny skombinujú do jednej sekvencie spolu so špeciálnymi servisnými tokenmi (napr. [CLS] pre klasifikáciu)\cite{arxiv:2102.03334}. Spracovanie: Táto jedna sekvencia sa potom pridá do jedného zásobníka vrstiev Transformer Encoderu. V rámci tohto encoderu dochádza k intermodálnej interakcii prostredníctvom mechanizmov pozornosti, kde sa model učí vytvárať vzťahy medzi slovami a oblasťami obrázkov.
+\end{enumerate}
+
+\begin{table}[H]
+    \centering
+    \caption{Kľúčové vlastnosti} 
+    \resizebox{0.9\textwidth}{!}{
+    \begin{tabular}{|>{\bfseries}p{0.3\textwidth}|p{0.7\textwidth}|}
+        \hline
+        \textbf{Zvláštnosť} & \textbf{Popis} \\
+        \hline
+        \textbf{Jednotný Transformer (Unified Architecture)} & ViLT používa jeden Transformer na spracovanie oboch modalít. Toto je kľúčový rozdiel od tradičných dvojprúdových modelov, ktoré spracovávali obrázok a text oddelene a potom ich spájali. \\
+        \hline
+        \textbf{Absencia CNN-backbone} & Model odmieta predtrénované CNN a zložité detektory objektov, ktoré boli predtým potrebné na extrakciu príznakov. To radikálne zjednodušuje vizuálny konvejer\cite{arxiv:2102.03334}. \\
+        \hline
+        \textbf{Minimalistický Dizajn} & Spracovanie vizuálneho vstupu je silno zjednodušené na rovnakú úroveň ako spracovanie textového vstupu (lineárna projekcia patchov). To prenáša väčšinu výpočtovej záťaže na modelovanie interakcie medzi modalitami. \\
+        \hline
+    \end{tabular}
+    }
+\end{table}
+
+
+\begin{table}[H]
+\centering
+\caption{Prehľad výhod a nevýhod}
+\resizebox{0.9\textwidth}{!}{
+\begin{tabular}{|p{0.13\textwidth}|p{0.24\textwidth}|p{0.54\textwidth}|}
+\hline
+\textbf{Typ} & \textbf{Názov} & \textbf{Popis} \\
+\hline
+\textbf Výhoda & Extrémna rýchlosť spracovania & ViLT je výrazne rýchlejší ako modely s regionálnymi extraktormi príznakov. To je kľúčové pre real-time moderovanie sociálnych sietí, kde je potrebné okamžite vyhodnotiť multimediálny príspevok po jeho zverejnení. \\
+\hline
+\textbf Výhoda & Architektonická jednoduchosť &  Odstránenie zložitých vizuálnych extraktorov (ako CNN) znižuje riziko, že sa model „preučí“ na špecifický šum trénovacieho datasetu, čo zvyšuje jeho robustnosť pri analýze rôznych formátov obrázkov z GenAI.\\
+\hline
+\textbf Výhoda & Efektívna multimodálna fúzia & Model sa od začiatku trénuje na interakciu textu a obrazu, čo mu umožňuje lepšie identifikovať prípady, kedy AI-generovaný text nekoreluje s vizuálnym kontextom príspevku\cite{arxiv:2102.03334}. \\
+\hline
+\textbf Nedostatok & Nepriehľadnosť (Black Box) & Ako všetky zložité neurónové siete, aj ViLT je v podstate "čierna skrinka". Je ťažké ju interpretovať (ťažko vysvetliť, prečo prijala to či ono rozhodnutie)\cite{arxiv:2102.03334}.\\
+\hline
+\textbf Nedostatok & Strata detailov (Patching) & Použitie veľkých lineárnych patchov namiesto hĺbkovej vizuálnej analýzy môže viesť k prehliadnutiu jemných artefaktov generatívnych modelov (napr. neprirodzené textúry kože alebo drobné chyby v pozadí).\\
+\hline
+\textbf Nedostatok & Závislosť od embeddingu & Expresívna sila modelu je obmedzená expresívnou silou jednoduchého vizuálneho vloženia/embeddera (lineárnej projekcie) a jeho preddefinovaným vizuálnym "slovníkom"\cite{arxiv:2102.03334}.
+\\
+\hline
+
+\end{tabular}
+}
+\end{table}
+
+
+
+\subsection{BLIP-2}
+
+BLIP-2 (Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models) je pokročilý multimodálny model vyvinutý spoločnosťou Salesforce Research, ktorý predstavuje významný pokrok v oblasti efektívneho predtrénovania vizuálno-lingvistických modelov. Základnou filozofiou BLIP-2 je využitie už existujúcich, zmrazených predtrénovaných modelov - obrazových kodérov a veľkých jazykových modelov (LLM) - namiesto nákladného end-to-end trénovania celého systému od začiatku\cite{BLIP2}.
+
+Primárnym cieľom BLIP-2 je prekonať problém vysokých výpočtových nákladov spojených s tradičným predtrénovaním vizuálno-lingvistických modelov. Model dosahuje state-of-the-art výsledky v rôznych vizuálno-lingvistických úlohách pri výrazne menšom počte trénovateľných parametrov. Napríklad, BLIP-2 prekonáva model Flamingo80B o 8,7\% v zero-shot VQAv2 úlohe, pričom má 54-krát menej trénovateľných parametrov.
+
+Architektúra a kompozícia BLIP-2. Kľúčovou inováciou BLIP-2 je zavedenie ľahkého modulu nazývaného Querying Transformer (Q-Former), ktorý slúži akomost medzi zmrazeným obrazovým kodérom a zmrazeným veľkým jazykovým modelom.
+
+\begin{enumerate}
+    \item Querying Transformer (Q-Former): Q-Former je ľahký transformátor s 188 miliónmi parametrov, ktorý funguje ako informačné úzke hrdlo (bottleneck) medzi zmrazeným obrazovým kodérom a zmrazeným LLM. Obsahuje dva submoduly zdieľajúce tie isté self-attention vrstvy: obrazový transformátor, ktorý interaguje so zmrazeným obrazovým kodérom pre extrakciu vizuálnych prvkov, a textový transformátor, ktorý môže fungovať ako textový kodér aj dekodér\cite{BLIP2}.
+    
+    \item Naučiteľné dopytové vektory (Learnable Query Embeddings): Q-Former používa sadu naučiteľných dopytových embeddingov (v experimentoch 32 dopytov, každý s dimenziou 768) ako vstup do obrazového transformátora. Tieto dopyty interagujú medzi sebou prostredníctvom self-attention vrstiev a s mrazenými obrazovými prvkami prostredníctvom cross-attention vrstiev. Architektúra úzkeho hrdla núti dopyty extrahovať iba tie vizuálne informácie, ktoré sú najrelevantnejšie pre text.
+    
+    \item Zmrazené predtrénované modely: BLIP-2 využíva zmrazené Vision Transformer modely (ViT-L/14 z CLIP alebo ViT-g/14 z EVA-CLIP) ako obrazové kodéry a zmrazené veľké jazykové modely (OPT alebo FlanT5) na generovanie textu. Zmrazenie týchto modelov výrazne znižuje výpočtové náklady a predchádza katastrofickému zabúdaniu (catastrophic forgetting)\cite{BLIP2}.
+\end{enumerate}
+
+Dvojstupňová stratégia predtrénovania. BLIP-2 používa novú dvojstupňovú stratégiu predtrénovania, ktorá postupne učí Q-Former prepájať vizuálne a textové modality.
+
+\textbf{Prvá fáza: Učenie vizuálno-lingvistických reprezentácií}
+
+V prvej fáze je Q-Former pripojený k zmrazenému obrazovému kodéru a trénuje sa na naučenie extrakcie vizuálnych reprezentácií, ktoré sú najinformatívnejšie pre text. Táto fáza kombinuje tri predtrénovacie ciele, z ktorých každý používa inú stratégiu maskovania pozornosti:
+
+\begin{enumerate}
+    \item Image-Text Contrastive Learning (ITC): Zarovnáva reprezentácie obrazu a textu maximalizáciou ich vzájomnej informácie. Q-Former vypočíta párovú podobnosť medzi každým výstupom dopytu a textovou reprezentáciou, pričom vyberie najvyššiu hodnotu ako obraz-text podobnosť.
+    
+    \item Image-grounded Text Generation (ITG): Trénuje Q-Former generovať text s obrazom ako podmienkou. Táto stratégia núti dopyty extrahovať všetky vizuálne prvky potrebné na generovanie textu, pretože architektúra neumožňuje priamu interakciu medzi zmrazeným obrazovým kodérom a textovými tokenmi.
+    
+    \item Image-Text Matching (ITM): Binárna klasifikačná úloha, ktorá učí jemné zarovnanie medzi obrazom a textom. Model predpovedá, či je pár obraz-text pozitívny (zhodný) alebo negatívny (nezhodný)\cite{BLIP2}.
+\end{enumerate}
+
+\textbf{Druhá fáza: Učenie vizuálno-lingvistickej generatívnej schopnosti}
+
+V druhej fáze sa Q-Former (s pripojeným zmrazeným obrazovým kodérom) pripája k zmrazenému LLM. Výstupné dopytové embeddingy z Q-Former sa lineárne projektujú do rovnakej dimenzie ako textové embeddingy LLM a pridajú sa pred vstupné textové embeddingy. Fungujú ako mäkké vizuálne prompty (soft visual prompts), ktoré podmieňujú LLM na vizuálnej reprezentácii\cite{BLIP2}.
+
+BLIP-2 experimentuje s dvoma typmi LLM:
+\begin{itemize}
+    \item Decoder-based LLM (napr. OPT): Používa sa language modeling loss, kde LLM generuje text podmienený vizuálnou reprezentáciou.
+    \item Encoder-decoder-based LLM: Používa sa prefix language modeling loss, kde sa text rozdelí na prefixovú časť (spojenú s vizuálnou reprezentáciou pre LLM enkodér) a suffixovú časť (použitú ako generačný cieľ pre LLM dekodér).
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \caption{Kľúčové vlastnosti BLIP-2} 
+    \resizebox{0.9\textwidth}{!}{
+    \begin{tabular}{|>{\bfseries}p{0.3\textwidth}|p{0.7\textwidth}|}
+        \hline
+        \textbf{Zvláštnosť} & \textbf{Popis} \\
+        \hline
+        \textbf{Modulárna architektúra so zmrazenými modelmi} & BLIP-2 využíva už existujúce predtrénované modely (obrazové kodéry a LLM) a drží ich zmrazené počas predtrénovania, čím výrazne znižuje výpočtové náklady a zabraňuje katastrofickému zabúdaniu. \\
+        \hline
+        \textbf{Querying Transformer (Q-Former)} & Ľahký transformátor (188M parametrov), ktorý slúži ako informačné úzke hrdlo medzi zmrazeným obrazovým kodérom a zmrazeným LLM. Extrahuje fixný počet výstupných prvkov nezávisle od rozlíšenia vstupného obrazu\cite{BLIP2}. \\
+        \hline
+        \textbf{Dvojstupňové predtrénovanie} & Prvá fáza: učenie vizuálno-lingvistických reprezentácií (ITC, ITG, ITM). Druhá fáza: učenie vizuálno-lingvistickej generatívnej schopnosti s LLM. Táto stratégia postupne buduje schopnosti modelu. \\
+        \hline
+        \textbf{Zero-shot schopnosti s inštrukciami} & Vďaka integrácii s LLM môže BLIP-2 vykonávať zero-shot generovanie obrazu na text, ktoré reaguje na inštrukcie v prirodzenom jazyku, vrátane vizuálneho uvažovania, vizuálnej konverzácie a personalizovaného generovania\cite{BLIP2}. \\
+        \hline
+    \end{tabular}
+    }
+\end{table}
+{\small
+\begin{longtable}{|p{0.135\textwidth}|p{0.216\textwidth}|p{0.486\textwidth}|}
+\caption{Prehľad výhod a nevýhod} \\
+\hline
+\textbf{Typ} & \textbf{Názov} & \textbf{Prínos pre detekciu GenAI} \\
+\hline
+\endfirsthead
+
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{pokračovanie}} \\
+\hline
+\textbf{Typ} & \textbf{Názov} & \textbf{Popis} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{3}{r}{\textit{pokračovanie na ďalšej strane}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\textbf{Výhoda} & Efektívna analýza veľkých dát & Vďaka zmrazeným modelom vyžaduje BLIP-2 menej trénovateľných parametrov. To umožňuje rýchle nasadenie systému na monitorovanie masívneho toku príspevkov zo sociálnych sietí pri zachovaní vysokej presnosti detekcie. \\
+\hline
+\textbf{Výhoda} & Adaptabilita na nové generátory & Metóda umožňuje jednoduchú výmenu obrazového kodéra alebo LLM. Ak sa objavia nové verzie generatívnych modelov (napr. Midjourney v6), BLIP-2 sa dokáže rýchlo adaptovať na ich špecifické vizuálne artefakty bez nutnosti kompletného pretrénovania\cite{BLIP2}. \\
+\hline
+\textbf{Výhoda} & Presné vizuálne zdôvodňovanie & Schopnosť Visual Question Answering (VQA) je kľúčová pre identifikáciu sémantických nekonzistencií v GenAI príspevkoch, kde textový popis nezodpovedá jemným detailom na vygenerovanom obrázku\cite{BLIP2}. \\
+\hline
+\textbf{Výhoda} & Multimodiálne porozumenie & Integrácia s LLM umožňuje modelu „pochopiť“ kontext príspevku. To pomáha detegovať prípady, kedy je reálny obraz použitý v zavádzajúcom, AI-generovanom kontexte (tzv. out-of-context príspevky). \\
+\hline
+\textbf{Nedostatok} & Obmedzené few-shot učenie & Absencia in-context learningu sťažuje modelu rýchle naučenie sa nových typov AI manipulácií len na základe niekoľkých príkladov v rámci jedného dopytu, čo vyžaduje robustnejší trénovací dataset. \\
+\hline
+\textbf{Nedostatok} & Riziko halucinácií LLM & Keďže BLIP-2 dedí vlastnosti LLM, môže si „vymýšľať“ popisy k obrazom (halucinácie). V detekčnom systéme to môže viesť k falošne pozitívnym výsledkom, kedy model nesprávne interpretuje artefakty obrazu. \\
+\hline
+\textbf{Nedostatok} & Závislosť od kvality kodéra & Ak zmrazený obrazový kodér nebol trénovaný na špecifické textúry typické pre GAN alebo difúzne modely, BLIP-2 môže prehliadnuť technické stopy generovania, ktoré sú pre človeka neviditeľné\cite{BLIP2}. \\
+\hline
+\end{longtable}
+}
+
+Predtrénovanie a dáta. BLIP-2 používa rovnaký predtrénovací dataset ako BLIP so 129 miliónmi obrazov celkovo, vrátane COCO, Visual Genome, CC3M, CC12M, SBU a 115 miliónov obrazov z datasetu LAION400M. Model je predtrénovaný 250 000 krokov v prvej fáze a 80 000 krokov v druhej fáze\cite{BLIP2}.
+
+BLIP-2 predstavuje významný krok smerom k efektívnemu využívaniu existujúcich predtrénovaných modelov v oblasti multimodálneho učenia. Jeho schopnosť dosahovať špičkové výsledky s minimálnymi výpočtovými nákladmi ho robí atraktívnou voľbou pre praktické aplikácie a ďalší výskum v oblasti vizuálno-lingvistických systémov.
+
+
+\subsection{LaCLIP}
+
+LaCLIP (Language augmented CLIP) predstavuje inovatívne rozšírenie klasického CLIP modelu, ktoré signifikantne zlepšuje kvalitu multimodálneho predtrénovania zavedením augmentácií v textovej modalite. Zatiaľ čo štandardný CLIP aplikuje rôzne augmentácie na obrazové vstupy (random cropping, color jittering, atď.), textové vstupy počas celého trénovacieho procesu zostávajú nezmenené. Táto asymetria reprezentuje významný problém: obrazové kodéry dostávajú neosobité signály zo strany textovej modality (vždy rovnaký text k mierne variovanému obrázku), a textové kodéry sa stretávajú s identickými textami v každej trénovacej epoché, čo zvyšuje riziko pretrénovania.
+
+\textbf{Princíp a metodológia}
+
+LaCLIP rieši túto asymetriu pomocou generovania diverzných textových variantov z pôvodných opisov obrázkov. Metodológia využíva schopnosť veľkých jazykových modelov (LLM) na in-context learning (ICL) prostredníctvom otvoreného modelu LLaMA\cite{LaCLIP}. Proces pozostáva z troch kľúčových fáz:
+
+\begin{enumerate}
+\item \textbf{Generovanie meta-vstup-výstup párov}: Autori vytvárajú malú sadu referencií (16 párov) pomocou štyroch stratégií:
+\begin{itemize}
+\item ChatGPT alebo Bard (chatboty) - generovanie rôznorodých prepisov pôvodných textov
+\item MS-COCO dataset - využitie viacnásobných ľudských popisov k jednomu obrázku
+\item Ľudský prepis - využitie anotátorov na manuálne prepisovanie vzoriek
+\end{itemize}
+Tieto páry slúžia ako príklady pre in-context learning, ktorý modelu ukazuje, ako by malo prepisovanie vyzerať\cite{LaCLIP}.
+
+\item \textbf{Masívne generovanie prepisov}: Pomocou LLaMA-7B modelu sa generujú štyri diverzné prepisy pre každý text v datasete. Kontext pre generovanie pozostáva z: (a) instrukcie na prepis, (b) troch náhodne vybraných príkladov z meta-párov, (c) pôvodného textu na prepis. Generovanie všetkých prepisov pre dataset CC3M (2.8 miliónov vzoriek) trvá približne 7 hodín na 8 GPU kartách typu A100\cite{LaCLIP}.
+
+\item \textbf{Trénovanie s textovou augmentáciou}: Počas trénovania sa pre každý obrázok náhodne vyberie buď pôvodný text, alebo jeden z generovaných prepisov. Trénovacia strata zostáva symetrickou kombináciou krížovej entropie na strane obrázkov a textov, s tým rozdielom, že textové kodéry teraz získavajú rôznorodé textové signály\cite{LaCLIP}.
+\end{enumerate}
+
+\textbf{Vlastnosti a charakteristiky}
+
+Kľúčovou výhodou LaCLIP je, že trénovanie modelu sa neurychluje ani nezpomaluje - nedochádza k zvýšeniu výpočtových nákladov alebo pamäte. Úplné zvýšenie počtu operácií nastáva iba počas jednorazovej prípravy dataset (generovanie prepisov), nie počas iterácií trénovania.
+
+Generované prepisy sa vyznačujú vysokou rôznorodosťou v porovnaní s tradičnými metódami augmentácie:
+\begin{itemize}
+\item EDA (Easy Data Augmentation) - realizuje len slovo-úrovňové zmeny (synonymá, random deletion, swap), čím sa udržuje pôvodná štruktúra\cite{LaCLIP}
+\item Back-translation - preklad do iného jazyka a späť udržiava podobnú syntaxu a sémantiku\cite{LaCLIP}
+\item LaCLIP - LLM generuje rôznorodé štruktúry viet pri zachovaní kľúčových pojmov a sémantiky\cite{LaCLIP}
+\end{itemize}
+
+\begin{table}[h!]
+\centering
+\caption{Kľúčové vlastnosti LaCLIP} 
+\resizebox{0.9\textwidth}{!}{
+\begin{tabular}{|>{\bfseries}p{0.3\textwidth}|p{0.7\textwidth}|}
+    \hline
+    \textbf{Zvláštnosť} & \textbf{Popis} \\
+    \hline
+    \textbf{Asymetrická augmentácia v CLIPe} & Klasický CLIP augmentuje iba obrazy, nie texty. LaCLIP dopĺňa túto asymetriu generovaním diverzných textových variantov pomocou LLM. \\
+    \hline
+    \textbf{In-Context Learning s LLaMA} & Využívajúc schopnosť in-context learningu, systém učí LLaMA na základe príkladov bez potreby fine-tuningu, čo znižuje náklady na prípravu údajov.\cite{LaCLIP} \\
+    \hline
+    \textbf{Vysoká diverzita textov} & Na rozdiel od tradičných augmentácií, LLM generuje rozmanité prepisy s variáciami v štruktúre viet, slovníku a detailoch, pričom udržiava sémantickú zhodu. \\
+    \hline
+    \textbf{Bez nárastu výpočtových nákladov trénovania} & Augmentácia textov nezvyšuje pamäť ani čas výpočtu počas trénovania. Jediné náklady sú jednorazové počas prípravy datasetu. \\
+    \hline
+    \textbf{Kompatibilita s inými metódami} & LaCLIP sa dá bezproblémne kombinovať s inými technikami ako SLIP (self-supervised learning), čím sa vytvárajú modely ako LaSLIP\cite{LaCLIP}. \\
+    \hline
+\end{tabular}
+}
+\end{table}
+
+\textbf{Experimentálne výsledky}
+
+Publikované výsledky ukazujú konzistentné zlepšenia na viacerých datasetoch pri rôznych veľkostiach modelov:
+
+\begin{itemize}
+\item \textbf{CC12M}: 8.2\% absolútne zlepšenie presnosti zero-shot klasifikácie na ImageNet (z 40.2\% na 48.4\%)\cite{LaCLIP}
+\item \textbf{LAION-400M}: 2.4\% absolútne zlepšenie (z 62.0\% na 64.4\%)\cite{LaCLIP}
+\item \textbf{CC3M}: Výrazné zlepšenie na menších datasetoch (z 15.8\% na 21.5\%)\cite{LaCLIP}
+\item \textbf{RedCaps}: Potvrdenie efektívnosti na sociálnymi médiami zbieraných dátach
+\end{itemize}
+
+Zlepšenia sa pozorovať nielen pri zero-shot klasifikácii, ale aj pri few-shot learning a linear probing scenároch, čo dokazuje, že LaCLIP vylepšuje kvalitu nižných reprezentácií vytvárané obrazovými kodérmi.
+
+{\small
+\begin{longtable}{|p{0.135\textwidth}|p{0.216\textwidth}|p{0.486\textwidth}|}
+\caption{Prehľad výhod a nevýhod LaCLIP} \label{tab:laclip_comparison} \\
+\hline
+\textbf{Typ} & \textbf{Názov} & \textbf{Prínos pre detekciu GenAI} \\
+\hline
+\endfirsthead
+
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{pokračovanie}} \\
+\hline
+\textbf{Typ} & \textbf{Názov} & \textbf{Popis} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{3}{r}{\textit{pokračovanie na ďalšej strane}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+\textbf{Výhoda} & Lepšia detekcia text-image nesúladu & Textová augmentácia učí model rozpoznávať vzťah medzi pôvodným a prepísaným textom, čo zvyšuje citlivosť pri identifikácii príspevkov, kde AI text presne nekorešponduje s obrázkom. \\
+\hline
+\textbf{Výhoda} & Zníženie pretrénovania textových kodérov & Textové kodéry dostávajú diverznejšie signály počas trénovania, čo znižuje riziko preoptimalizácie na špecifické frazes a zvyšuje schopnosť zovšeobecnenia. To je kritické pri detekácii nových a nevidených typov AI generovaného obsahu. \\
+\hline
+\textbf{Výhoda} & Bez nárastu výpočtových nákladov & Augmentácia nezvyšuje trvanie trénovania ani požiadavky na pamäť, čo umožňuje jej ľahkú integráciu do existujúcich trénovacích pipeline-ov. \\
+\hline
+\textbf{Výhoda} & Robustnosť voči variáciám GenAI & Modely trénované s LaCLIP sú odolnejšie voči rôznorodým štýlom textu používanými rôznymi generátormi (ChatGPT, Bard, atď.), čím zlepšujú detekciu hoci aj keď text vytvára iný LLM než ten, na ktorom sa model trénoval\cite{LaCLIP}. \\
+\hline
+\textbf{Výhoda} & Lepšie representation learning & Zvýšená diverzita textových párov vedie k vytvoreniu lepšieho spoločného semántického priestoru pre obrazy a texty, čo zlepšuje učenie reprezentácií nielen pre text, ale aj pre obrazy (viditeľné cez linear probing metriky). \\
+\hline
+\textbf{Nedostatok} & Jednorazové výpočtové náklady & Generovanie prepisov pre veľké datasety (až 400M vzoriek) vyžaduje značné GPU zdroje a čas. Pre LAION-400M by sa jednorazový čas mohol pohybovať od niekoľkých stoviek až tisícov hodín GPU\cite{LaCLIP}. \\
+\hline
+\textbf{Nedostatok} & Kvalita LLM generácie & Ak LLaMA generuje nerelevantné alebo sémanticky odlišné prepisy, model sa môže učiť z „hlučných" textov. Bez filtrácie kvalitných prepisov môže dôjsť k degradácii výkonu\cite{LaCLIP}. \\
+\hline
+\textbf{Nedostatok} & Limitovaná kontrola nad augmentáciou & LaCLIP nemá mechanizmus na explicitné riadenie typu generovaných variácií. Ak sú všetky prepisy príliš podobné, augmentácia nebude efektívna; ak sú príliš odlišné, môže dôjsť k sémantickému skresleniu. \\
+\hline
+\textbf{Nedostatok} & Nedostatoční in-context učenie pre nové domény & Keď sa LaCLIP aplikuje na nový typ domény (napr. neobvyklejší štýl textu na sociálnych sieťach), kvalita prepisov závisí od kvalitnej sady meta-príkladov. Bez dobrých príkladov pre konkrétnu doménu môže generovanie prepisov podľa metódy zlyhať. \\
+\hline
+\end{longtable}
+}
+
+
+LaCLIP predstavuje pokrok v leverovaní multimodálneho predtrénovania tým, že čistí asymetriu v augmentáciách dát a umožňuje lepšie učenie sa komplexných vzťahov medzi textom a obrázkami. 
+
+
+\subsection{Transferové učenie v multimodálnej detekcii}
+Transferové učenie zohráva kľúčovú úlohu pri adaptácii rozsiahlych vopred natrénovaných multimodálnych modelov (ako napríklad CLIP) na špecializované úlohy vrátane detekcie obsahu generovaného umelou inteligenciou (GenAI) na sociálnych sieťach. 
+
+Transferové učenie zahŕňa použitie váh a znalostí získaných modelom počas tréningu na veľkom súbore údajov a ich prenos do novej, špecifickejšej úlohy. 
+
+V kontexte multimodálnej detekcie je to kritické z troch dôvodov: 
+
+\begin{enumerate}
+    \item Vzhľadom na zložitosť generovania rozsiahlych textovo-obrázkových súborov údajov generovaných modelmi GenAI je tréning na špecializovaných údajoch obmedzený. Transferové učenie prekonáva túto nevýhodu a dosahuje vysoký výkon s malým súborom údajov. 
+    \item Úspora zdrojov: Trénovanie multimodálneho modelu od začiatku vyžaduje obrovský výpočtový výkon a čas, čo je pre väčšinu výskumníkov a projektov nedostupné. Používanie vopred natrénovaných váh výrazne znižuje náklady na preškolenie. 
+    \item Schopnosť zovšeobecnenia: Základný model už má reprezentáciu vzťahov medzi textom a obrázkami (napr. medzi slovom „mačka“ a obrázkom mačky). To mu umožňuje rýchlejšie sa učiť a lepšie rozpoznávať nové, doteraz nevidené príklady obsahu GenAI\cite{huggingface:transfer_learning}.
+\end{enumerate}
+
+Adaptačné stratégie pre multimodálne modely. Na aplikáciu transferového učenia na úlohu detekcie sa používajú rôzne stratégie jemného doladenia: 
+
+\begin{enumerate}
+    \item Extrakcia prvkov: Toto je najjednoduchší a najefektívnejší prístup z hľadiska zdrojov. Hlavné komponenty modelu (kodéry obrázkov a textu) sú zmrazené a ich úloha je redukovaná na extrakciu vysokokvalitných, zovšeobecnených vektorov prvkov (vnorení). Na základe týchto vektorov sa trénuje iba nová, malá klasifikačná hlava, ktorá určuje, či sa obsah vygeneruje alebo nie\cite{huggingface:transfer_learning}. 
+    \item Úplné jemné doladenie kódera: Váhy všetkých alebo takmer všetkých vrstiev multimodálneho modelu sa mierne upravia, čím sa proces jemného doladenia na cieľovom súbore údajov GenAI vykoná s veľmi nízkou mierou učenia. Tento prístup poskytuje najlepší výkon, pretože umožňuje modelu jemne doladiť svoje všeobecné reprezentácie na špecifické artefakty obsahu GenAI, ale metóda jemného doladenia je výrazne náročnejšia na zdroje.
+    \item Parametricky efektívne jemné doladenie (PEFT): Moderné techniky umožňujú jemné doladenie modelu úpravou iba malého počtu pomocných parametrov, pričom väčšina váh zostáva nezmenená.
+\end{enumerate}
+
+
+\subsection{Fine-Tuning ako súčasť transferového školenia}
+Jemné doladenie (Fine-Tuning) je kľúčovou metodológiou v paradigme transferového učenia, ktorej cieľom je prispôsobiť model predtrénovaný na veľkom počiatočnom súbore údajov novej, špecifickej cieľovej úlohe.
+
+Samotné transferové učenie je proces, ktorý zlepšuje učenie novej úlohy prenosom vedomostí získaných učením sa už vyriešenej, ale súvisiacej úlohy.
+
+\textbf{Princíp a zdôvodnenie metódy:}
+
+Princíp jemného doladenia spočíva v tom, že namiesto začatia procesu trénovania neurónovej siete od nuly sa model inicializuje váhami a znalosťami predtrénovanej siete. Tieto váhy slúžia ako inicializačný bod pre model, keď sa prispôsobuje novej cieľovej úlohe. Tento prístup je kľúčový, pretože umožňuje efektívne využitie existujúcich vedomostí o všeobecných vzoroch a vlastnostiach údajov, ktoré sa model naučil extrahovať počas fázy predtrénovania. 
+
+Jemné doladenie prekonáva bežný problém nedostatku veľkého množstva označených údajov pre mnohé vysoko špecializované oblasti. Model, ktorý už má schopnosť extrahovať zovšeobecnené a užitočné vlastnosti zo zdrojového súboru údajov, môže dosiahnuť vysoký výkon v cieľovej úlohe s použitím iba relatívne malej sady označených údajov na jemné doladenie\cite{researchgate:fine_tuning_transfer_learning}.
+
+\textbf{Dvojstupňový proces}
+
+Jemné doladenie zahŕňa dva kľúčové kroky:
+
+\begin{enumerate}
+ \item Predtrénovanie (Pretraining): Model získa všeobecné reprezentácie štruktúry a vzorov údajov trénovaním na veľkom množstve neoznačených alebo označených údajov, ktoré priamo nesúvisia s cieľovou úlohou.
+
+\item Jemné doladenie (Fine-Tuning): Počas tohto kroku sa model pretrénuje na cieľovej množine údajov. To umožňuje upraviť jeho váhy tak, aby sa optimalizovala extrakcia prvkov špecificky pre novú úlohu\cite{researchgate:fine_tuning_transfer_learning}. Výsledkom je rýchlejšie dokončenie trénovania a zvyčajne vyššia presnosť na cieľovej úlohe v porovnaní s trénovaním modelu od začiatku. 
+\end{enumerate}
+
+\textbf{Variácie stratégií jemného doladenia}
+
+V závislosti od dostupných výpočtových zdrojov a veľkosti cieľovej množiny údajov sa používajú rôzne variácie jemného doladenia:
+
+\begin{enumerate}
+\item Jemné doladenie s fixným extraktorom prvkov (Fixed Future Extractor):
+
+\begin{itemize}
+\item V tomto prípade sa váhy predtrénovanej siete udržiavajú zmrazené, čo znamená, že sa počas trénovania na cieľovom probléme neaktualizujú.
+
+\item Zmrazené vrstvy fungujú ako fixný extraktor prvkov, ktorý extrahuje prvky zo vstupných údajov\cite{researchgate:fine_tuning_transfer_learning}.
+
+\item Extrahované znaky sa potom odovzdávajú ako vstup do nového, zvyčajne malého klasifikátora (alebo iných výstupných vrstiev), ktorý sa trénuje od začiatku na cieľovom súbore údajov.
+
+\item Výhodou tejto metódy je, že zabraňuje preťaženiu na malom cieľovom súbore údajov.
+\end{itemize}
+
+\item Úplné doladenie (Full Fine-Tuning):
+\begin{itemize}
+\item V tejto stratégii sa váhy predtrénovaného modelu rozmrazia (rozmrazenie váh).
+
+\item Všetky parametre modelu sa aktualizujú počas trénovania na cieľovom probléme, hoci niekedy sa doladí iba posledných niekoľko vrstiev.
+
+\item Aby sa zabránilo katastrofickému zabúdaniu (strate vedomostí nahromadených počas predtrénovania), zvyčajne sa používa výrazne nižšia miera učenia ako tá, ktorá sa používala počas fázy predtrénovania.
+
+\item Táto metóda umožňuje modelu presne prispôsobiť svoje parametre cieľovému problému, čo často vedie k najlepším výsledkom, ale vyžaduje si viac zdrojov.
+\end{itemize}
+\end{enumerate}
+
+Doladenie je výkonný nástroj, ktorý umožňuje využiť generalizačné schopnosti veľkých modelov pre vysoko špecializované problémy a zároveň poskytuje flexibilitu pri správe výpočtových zdrojov a rizika preťaženia.
+
+
+
+
+
+\subsection{Evaluácia multimodálnych modelov: metriky a metodiky}
+
+Hodnotenie multimodálnych modelov je kľúčovým krokom v ich vývoji, pretože pomáha identifikovať ich silné a slabé stránky, posúdiť ich vhodnosť pre praktické využitie a zabezpečiť ich bezpečnosť. Proces hodnotenia multimodálnych LLM je štruktúrovaný okolo troch osí: čo hodnotiť, kde hodnotiť a ako hodnotiť\cite{researchgate:A_Survey_on_Evaluation_of_Multimodal_Large_Language_Models}. Tento rámec formuje prístup používaný v modernom výskume multimodálnych modelov.
+
+Existujú tri hlavné skupiny úloh: multimodálne rozpoznávanie, vnímanie a uvažovanie. Toto sú základné kognitívne schopnosti potrebné na to, aby model plne spracoval obrázky a text\cite{researchgate:A_Survey_on_Evaluation_of_Multimodal_Large_Language_Models}. 
+
+Multimodálne rozpoznávanie zahŕňa identifikáciu objektov, akcií, vlastností a tlačeného textu. Tieto úlohy testujú schopnosť modelu rozumieť vizuálnemu obsahu a spájať ho s textovými popismi.
+
+Vnímanie sa týka lokalizácie objektov, detekcie vzťahov a štruktúry scény. Testuje schopnosť modelu analyzovať zloženie obrazu a priestorové vzťahy.
+
+Uvažovanie zahŕňa logické, relačné a zvukové závery založené na kombinácii textu a obrázkov.
+
+Dôležitou dodatočnou kategóriou je dôveryhodnosť (trustworthiness), ktorá zahŕňa hodnotenie halucinácií, skreslení, chýb zovšeobecnenia a odolnosti voči nepriateľským vplyvom. Táto oblasť je obzvlášť relevantná pri použití modelov v medicíne, video analýze a úlohách s vysokými stávkami.
+
+Špecifickým prínosom k evaluácii v roku 2024 bol dataset predstavený v rámci úlohy SemEval-2024 Task 8, ktorý zahŕňa viac ako 1 milión vzoriek. Tento benchmark umožňuje testovať modely v troch kritických rovinách: * Binárna klasifikácia: Rozlišovanie medzi textom napísaným človekom a textom vygenerovaným strojom. * Multi-way klasifikácia: Schopnosť určiť, ktorý konkrétny veľký jazykový model (LLM) vytvoril daný obsah. * Detekcia zmiešaného obsahu: Identifikácia hraníc v textoch, ktoré kombinujú ľudskú prácu s umelou inteligenciou\cite{Fine-tuning_Language_Models_for_AI_vs_Human_Generated_Text_detection}.
+
+Existujúce benchmarky možno rozdeliť do troch skupín: všeobecné, pre analýzu spoľahlivosti a špecializované\cite{researchgate:A_Survey_on_Evaluation_of_Multimodal_Large_Language_Models}.
+
+\textbf{Všeobecné multimodálne benchmarky}
+
+Medzi najpoužívanejšie patria:
+\begin{itemize}
+\item MMBench, MM-Vet, Seed-Bench, MME, MMStar, TouchStone a LogicVista.
+\end{itemize}
+
+Tieto súbory úloh hodnotia širokú škálu zručností – od základného rozpoznávania až po logickú inferenciu a multimodálnu interpretáciu\cite{researchgate:A_Survey_on_Evaluation_of_Multimodal_Large_Language_Models}. 
+
+\textbf{Benchmarky dôveryhodnosti}
+
+Samostatná skupina sa používa na analýzu robustnosti a bezpečnosti modelov:
+
+\begin{itemize}
+\item POPE - detekcia halucinácií objektov,
+\item CHEF - hodnotenie výkonu a bezpečnosti,
+\item Multi-Trust - meranie skreslení a iných rizík.
+\end{itemize}
+
+
+Tieto benchmarky sa stávajú obzvlášť dôležitými v reálnych scenároch, kde chyby modelu môžu mať vážne následky\cite{researchgate:A_Survey_on_Evaluation_of_Multimodal_Large_Language_Models}.
+
+\textbf{Špecializované benchmarky}
+
+Pre špecifické oblasti sa používajú úzko zamerané súbory problémov:
+\begin{itemize}
+\item ScienceQA, MathVerse - vedecké a matematické uvažovanie,
+\item GMAI-MMBench - medicína,
+\item CVQA - kultúrne relevantné úlohy,
+\end{itemize}
+
+Umožňujú nám určiť, ako dobre sa model prispôsobuje údajom mimo štandardných textovo-vizuálnych scenárov.
+
+Metódy hodnotenia sa delia na ľudské hodnotenie, hodnotenie založené na modeli (LLM-as-a-judge) a formálne metriky.
+
+\textbf{Ľudské hodnotenie}
+
+Hodnotenie expertmi zostáva najpresnejšou metódou analýzy kvality multimodálneho výstupu; je však náročné na pracovnú silu a nie vždy škálovateľné. V kontexte detekcie strojovo generovaného obsahu sa však ukazuje, že ľudský úsudok má svoje jasné limity. Výsledky nedávnych experimentálnych štúdií naznačujú, že bežní používatelia dosahujú pri identifikácii textov vygenerovaných umelou inteligenciou úspešnosť len na úrovni 24 \%. Tento fakt potvrdzuje nevyhnutnosť stanovenia tzv. „human baseline“ (ľudskej základnej línie) ako referenčnej hodnoty, ktorú by mali automatizované systémy a navrhované metriky v rámci experimentov výrazne prekonávať\cite{Detecting_Artificial_Intelligence_Generated_Text_from_Human-Written_Text}.
+
+\textbf{Hodnotenie pomocou GPT-4}
+
+Vznikajú automatizované schémy, ktoré používajú GPT-4 ako nezávislého „sudcu“. Tento prístup zabezpečuje robustnosť hodnotení a umožňuje analýzu štruktúry odpovedí na základe kritérií presnosti, užitočnosti a logickej konzistencie.
+
+Kvantitatívne metriky
+
+Metriky závisia od typu úlohy.
+
+1. Metriky rozpoznávania
+\begin{itemize}
+\item Presnosť, Priemerná presnosť (AP).
+\end{itemize}
+
+Používajú sa na klasifikačné úlohy a optické rozpoznávanie znakov.
+
+V úlohách detekcie generovaného obsahu sú kľúčovými metrikami aj Presnosť (Precision), Návratnosť (Recall) a ich harmonický priemer F1-score. F1-score je mimoriadne dôležitý v prípadoch nerovnomerného rozdelenia tried v datasete, nakoľko poskytuje objektívnejší pohľad na schopnosť modelu identifikovať minoritnú triedu (napr. príspevky vygenerované GenAI).
+
+2. Metriky vnímania
+
+\begin{itemize}
+\item mIoU, mAP, Koeficient kocky.
+\end{itemize}
+
+Vyhodnocujú presnosť lokalizácie a analýzy scény.
+
+3. Metriky generovania textu
+
+\begin{itemize}
+\item BLEU, ROUGE, METEOR.
+\end{itemize}
+
+Používajú sa na kontrolu kvality popisov a korešpondencie obrázkov\cite{researchgate:A_Survey_on_Evaluation_of_Multimodal_Large_Language_Models}.
+
+Vyhodnocovanie multimodálnych modelov vyžaduje komplexný prístup, ktorý integruje rôzne typy úloh, benchmarkov a metrík. Rámec „čo, kde a ako hodnotiť“ poskytuje systematickú analýzu možností modelu a pomáha identifikovať potenciálne obmedzenia pri aplikácii v reálnych podmienkach.
+
+% ... здесь заканчиваются ваши текстовые главы, например, \include{zaver}
+
+% --- СЮДА ВСТАВЬТЕ ЭТИ КОМАНДЫ ---
+\phantomsection % Помогает правильно создать закладку в PDF
+\addcontentsline{toc}{section}{Zoznam použitej literatúry} % Добавляет "Список литературы" в содержание
+\bibliography{literatura} % Загружает ваш файл literatura.bib и создает список
+
+\end{document}
+%%

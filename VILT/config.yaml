@@ -1,0 +1,22 @@
+random_seed: 42
+
+vilt:
+  name: dandelin/vilt-b32-mlm
+  batch_size: 8         # Уменьшаем с 16 до 8. 512 токенов занимают в 12 раз больше памяти!
+  device: auto
+  max_length: 512       # Тот самый ключ, который позволит читать длинные тексты целиком
+
+train:
+  clf_type: mlp
+  lr: 5e-4              # Немного снизил шаг (был 1e-3), чтобы модель не "скакала" при обучении на длинных данных
+  epochs: 50
+  patience: 10
+
+paths:
+  train: "../data/train.jsonl"
+  val:   "../data/val.jsonl"
+  test:  "../data/test.jsonl"
+  outdir: outputs
+
+features:
+  normalize: true

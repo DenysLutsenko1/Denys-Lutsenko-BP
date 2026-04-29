@@ -1,0 +1,2 @@
+{"text": "Человек написал этот пост.", "image_path": "images/real/1.jpg", "label": 0}
+{"text": "Этот пост сгенерировала нейросеть.", "image_path": "images/gen/1.jpg", "label": 1}
