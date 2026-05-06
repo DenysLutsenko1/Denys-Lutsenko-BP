@@ -7,9 +7,8 @@ import torch
 import joblib
 import argparse
 import numpy as np
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-from rich import print
-from rich.table import Table
+from sklearn.metrics import classification_report, accuracy_score, roc_auc_score
+from rich import print as rprint
 
 from src.datasets import load_jsonl, texts_images_labels
 from src.encoders import Blip2Encoder
@@ -17,65 +16,57 @@ from src.utils import get_device
 
 def main():
     parser = argparse.ArgumentParser()
-    # Укажи путь к тестовому или валидационному файлу
     parser.add_argument("--data", type=str, default="../data/val.jsonl")
-    parser.add_argument("--model", type=str, default="outputs/hybrid_model.joblib")
+    parser.add_argument("--model", "--ckpt", type=str, dest="model", default="outputs/hybrid_model.joblib")
+    parser.add_argument("--config", type=str)
     parser.add_argument("--batch_size", type=int, default=4)
     args = parser.parse_args()
 
     device = get_device("auto")
     
-    # 1. Загрузка модели и данных
-    print(f"[bold blue]Loading model:[/bold blue] {args.model}")
+    rprint(f"[bold blue]Loading model:[/bold blue] {args.model}")
     model_data = joblib.load(args.model)
     
-    # Инициализируем энкодер (BLIP-2 + SBERT)
     encoder = Blip2Encoder("Salesforce/blip2-opt-2.7b", device)
 
-    print(f"[bold blue]Loading data:[/bold blue] {args.data}")
+    rprint(f"[bold blue]Loading data:[/bold blue] {args.data}")
     dataset = load_jsonl(args.data)
     texts, images, y_true = texts_images_labels(dataset)
 
-    # 2. Получение эмбеддингов
-    print(f"[yellow]Encoding {len(texts)} samples...[/yellow]")
+    rprint(f"[yellow]Encoding {len(texts)} samples...[/yellow]")
     X = encoder.encode(texts, images, batch_size=args.batch_size)
     X = np.nan_to_num(X.astype(np.float32))
 
-    # 3. Предсказание
     clf = model_data["pipeline"]
     y_pred = clf.predict(X)
-    
-    # Если модель поддерживает вероятности, можно вытащить уверенность
     y_probs = clf.predict_proba(X)
 
-    # 4. Расчет и вывод метрик
-    acc = accuracy_score(y_true, y_pred)
-    report = classification_report(y_true, y_pred, output_dict=True)
+    # --- ИСПРАВЛЕННЫЙ РАСЧЕТ ROC AUC ---
+    try:
+        # Если классов всего 2 (shape[1] == 2), берем только вероятности класса 1
+        if y_probs.shape[1] == 2:
+            roc_auc = roc_auc_score(y_true, y_probs[:, 1])
+        else:
+            # Для многоклассовой классификации используем взвешенный OVR
+            roc_auc = roc_auc_score(y_true, y_probs, multi_class='ovr', average='weighted')
+    except Exception as e:
+        rprint(f"[bold red]ROC AUC Error:[/bold red] {e}")
+        roc_auc = 0.0
 
-    # Красивая таблица результатов через rich
-    table = Table(title=f"Model Evaluation Metrics (Acc: {acc:.4f})")
-    table.add_column("Class", justify="left", style="cyan")
-    table.add_column("Precision", justify="right", style="magenta")
-    table.add_column("Recall", justify="right", style="magenta")
-    table.add_column("F1-Score", justify="right", style="green")
+    # Получаем F1 Score (weighted) для вывода в заголовке
+    report_dict = classification_report(y_true, y_pred, output_dict=True)
+    f1_weighted = report_dict['weighted avg']['f1-score']
 
-    for label, metrics in report.items():
-        if label in ['accuracy', 'macro avg', 'weighted avg']:
-            continue
-        table.add_row(
-            str(label),
-            f"{metrics['precision']:.3f}",
-            f"{metrics['recall']:.3f}",
-            f"{metrics['f1-score']:.3f}"
-        )
-
-    print("-" * 50)
-    print(table)
-    print("-" * 50)
+    # --- ВЫВОД В СТИЛЕ ВАШЕГО СКРИНШОТА ---
+    print("\n" + "="*45)
+    print("             TESTSET RESULTS             ")
+    print("="*45)
+    print(f"ROC AUC:  {roc_auc:.4f}")
+    print(f"F1 Score: {f1_weighted:.4f}")
+    print("-" * 45)
     
-    # Матрица ошибок (Confusion Matrix) для понимания, где модель ошибается
-    cm = confusion_matrix(y_true, y_pred)
-    print(f"[bold]Confusion Matrix:[/bold]\n{cm}")
+    # digits=4 выведет 0.9524 вместо 0.95
+    print(classification_report(y_true, y_pred, digits=4))
 
 if __name__ == "__main__":
     main()
