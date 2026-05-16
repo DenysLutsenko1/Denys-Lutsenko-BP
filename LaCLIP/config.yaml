@@ -2,7 +2,7 @@ random_seed: 42
 
 encoder:                    # текстовый энкодер
   name: openai/clip-vit-base-patch32
-  max_length: 256
+  max_length: 77
   batch_size: 64
   device: auto
 
